@@ -1,0 +1,34 @@
+<body>
+<app-navbar [parent]="'tweets'"></app-navbar>
+<div class="row text-center">
+  <div class="col">
+    <a (click)="switchForm('text')">Post a Text</a>
+  </div>
+  <div class="col">
+    <a (click)="switchForm('pic')">Post a Picture</a>
+  </div>
+  <div class="form-group" *ngIf="posttext">
+    <textarea class="form-control" rows="3" (input)="tweet.text = $event.target.value"></textarea>
+  </div>
+  <div class="form-group" *ngIf="postpic">
+    <input type="file" class="form-control-file" (change)="onFileChange($event)">
+  </div>
+  <button class="btn btn-lg btn-primary " *ngIf="posttext || postpic" (click)="addTweet()">Tweet</button>
+</div>
+<hr>
+<div class="card text-white bg-dark mt-2" *ngFor="let tweet of tweets">
+  <div class="card-body" *ngIf="tweet.image">
+    <img [src]="'data:image/PNG;base64,' + tweet.image" class="img-circle">
+  </div>
+  <div class="card-body" *ngIf="tweet.text">
+    {{tweet.text}}
+  </div>
+  <br>
+  <div>
+    <button class="btn btn-danger float-right" (click)="deleteTweet(tweet)">Remove</button>
+  </div>
+</div>
+<div class="alert alert-info" *ngIf = "tweets.length == 0">
+  <strong>Info!</strong> No Tweets found, Please post.
+</div>
+</body>

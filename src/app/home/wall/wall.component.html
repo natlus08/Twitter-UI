@@ -1,0 +1,20 @@
+<body>
+  <app-navbar [parent]="'wall'"></app-navbar>
+  <div class="alert alert-info" *ngIf = "activeUser.friends && activeUser.friends.length == 0">
+    <strong>Info!</strong> You have no friends, Please find your pal.
+  </div>
+  <div class="alert alert-info" *ngIf="activeUser.friends && activeUser.friends.length > 0 && tweets.length == 0">
+    <strong>Info!</strong> No Tweets found, Please post.
+  </div>
+  <div class="card mt-2" *ngFor="let tweet of tweets">
+    <div class="card-header">
+      {{tweet.owner}}
+    </div>
+    <div class="card-body" *ngIf="tweet.image">
+      <img [src]="'data:image/PNG;base64,' + tweet.image" class="img-circle">
+    </div>
+    <div class="card-body" *ngIf="tweet.text">
+      {{tweet.text}}
+    </div>
+  </div>
+</body>

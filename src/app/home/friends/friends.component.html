@@ -1,0 +1,43 @@
+<body>
+<app-navbar [parent]="'friends'"></app-navbar>
+<div class="row">
+  <div class="col" >
+    <h4>My friends</h4>
+    <div class="alert alert-info" *ngIf = "friends && friends.length === 0">
+      <strong>Info!</strong> You have no friends, Please find your pal.
+    </div>
+    <table class="table table-striped" *ngIf="friends && friends.length > 0">
+      <thead>
+        <th></th>
+        <th>Name</th>
+        <th>Unfriend</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let friend of friends">
+          <td class="w-25"><img [src]="'data:image/PNG;base64,' + friend.avatar" class="img-thumbnail" *ngIf="friend.avatar"></td>
+          <td>{{friend.name}}</td>
+          <td><button class="btn btn-warning" (click)="unfriend(friend.userName)">Remove</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <h4>Available users</h4>
+    <input type="text" placeholder="Search by Name (Min 3 characters)" class="form-control mb-2" #queryField>
+    <table class="table table-striped" *ngIf="suggestedFriends && suggestedFriends.length > 0">
+      <thead>
+      <th></th>
+      <th>Name</th>
+      <th>Befriend</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of suggestedFriends">
+        <td class="w-25"><img [src]="'data:image/PNG;base64,' + user.avatar" class="img-thumbnail" *ngIf="user.avatar"></td>
+        <td>{{user.name}}</td>
+        <td><button class="btn btn-warning" (click)="befriend(user.userName)">Add</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
